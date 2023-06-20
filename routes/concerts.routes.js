@@ -24,7 +24,7 @@ router.route('/concerts').post((req, res) => {
 	const { performer, genre, price, day, image } = req.body;
 
 	if (performer && genre && price && day && image) {
-		const newTestimonial = {
+		const newConcert = {
 			id: uuidv4(),
 			performer,
 			genre,
@@ -35,7 +35,7 @@ router.route('/concerts').post((req, res) => {
 		db.concerts.push(newConcert);
 		res.json({ message: 'OK' });
 	} else {
-		res.status(400).json({ message: 'Fill in author and text' });
+		res.status(400).json({ message: 'Fill in the details' });
 	}
 });
 
@@ -44,14 +44,17 @@ router.route('/concerts/:id').put((req, res) => {
 		(item) => item.id === parseInt(req.params.id)
 	);
 	const { performer, genre, price, day, image } = req.body;
+	if (performer || genre || price || day || image) {
+		thisConcert.performer = performer;
+		thisConcert.genre = genre;
+		thisConcert.price = price;
+		thisConcert.day = day;
+		thisConcert.image = image;
 
-	thisConcert.performer = performer;
-	thisConcert.genre = genre;
-	thisConcert.price = price;
-	thisConcert.day = day;
-	thisConcert.image = image;
-
-	res.json({ message: 'OK' });
+		res.json({ message: 'OK' });
+	} else {
+		res.status(400).json({ message: 'Fill in the details' });
+	}
 });
 
 router.route('/concerts/:id').delete((req, res) => {

@@ -34,7 +34,7 @@ router.route('/seats').post((req, res) => {
 		db.seats.push(newSeat);
 		res.json({ message: 'OK' });
 	} else {
-		res.status(400).json({ message: 'Fill in author and text' });
+		res.status(400).json({ message: 'Fill in the details' });
 	}
 });
 
@@ -43,13 +43,16 @@ router.route('/seats/:id').put((req, res) => {
 		(item) => item.id === parseInt(req.params.id)
 	);
 	const { day, seat, client, email } = req.body;
+	if (day || seat || client || email) {
+		thisSeat.day = day;
+		thisSeat.seat = seat;
+		thisSeat.client = client;
+		thisSeat.email = email;
 
-	thisSeat.day = day;
-	thisSeat.seat = seat;
-	thisSeat.client = client;
-	thisSeat.email = email;
-
-	res.json({ message: 'OK' });
+		res.json({ message: 'OK' });
+	} else {
+		res.status(400).json({ message: 'Fill in the details' });
+	}
 });
 
 router.route('/seats/:id').delete((req, res) => {

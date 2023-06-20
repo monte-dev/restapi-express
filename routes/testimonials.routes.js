@@ -42,10 +42,14 @@ router.route('/testimonials/:id').put((req, res) => {
 	);
 
 	const { author, text } = req.body;
-	thisTestimonial.author = author;
-	thisTestimonial.text = text;
+	if (author || text) {
+		thisTestimonial.author = author;
+		thisTestimonial.text = text;
 
-	res.json({ message: 'OK' });
+		res.json({ message: 'OK' });
+	} else {
+		return res.status(400).json({ message: 'Fill in author and text' });
+	}
 });
 
 router.route('/testimonials/:id').delete((req, res) => {
