@@ -1,1 +1,1 @@
-[Live on replit](https://replit.com/@monte-dev/restapi-express)
+[Live on replit](https://restapi-express.monte-dev.repl.co)
