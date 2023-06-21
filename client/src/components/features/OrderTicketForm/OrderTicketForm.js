@@ -50,20 +50,24 @@ const OrderTicketForm = () => {
 		setOrder({ ...order, [name]: parseInt(value) });
 	};
 
-	const submitForm = async (e) => {
+	const submitForm = (e) => {
 		e.preventDefault();
 
 		if (order.client && order.email && order.day && order.seat) {
-			dispatch(addSeatRequest(order));
-			//refresh seats after successfully sending form
-			dispatch(loadSeatsRequest());
-			setOrder({
-				client: '',
-				email: '',
-				day: 1,
-				seat: '',
-			});
-			setIsError(false);
+			dispatch(addSeatRequest(order))
+				.then(() => {
+					dispatch(loadSeatsRequest());
+					setOrder({
+						client: '',
+						email: '',
+						day: 1,
+						seat: '',
+					});
+					setIsError(false);
+				})
+				.catch((error) => {
+					setIsError(true);
+				});
 		} else {
 			setIsError(true);
 		}
