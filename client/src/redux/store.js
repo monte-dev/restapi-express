@@ -7,15 +7,17 @@ import seats from './seatsRedux';
 
 // combine reducers
 const rootReducer = combineReducers({
-  concerts,
-  seats,
+	concerts,
+	seats,
 });
 
 const store = createStore(
-  rootReducer,
-  compose(
+	rootReducer,
+	compose(
 		applyMiddleware(thunk),
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		window.__REDUX_DEVTOOLS_EXTENSION__
+			? window.__REDUX_DEVTOOLS_EXTENSION__()
+			: (f) => f
 	)
 );
 

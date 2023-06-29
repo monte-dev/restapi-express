@@ -5,6 +5,7 @@ import {
 	getSeats,
 	loadSeatsRequest,
 	getRequests,
+	loadSeats,
 } from '../../../redux/seatsRedux';
 import './SeatChooser.scss';
 import io from 'socket.io-client';
@@ -17,15 +18,9 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
 	const [socket, setSocket] = useState('');
 
 	useEffect(() => {
-		const currentSocket = io(
-			process.env.NODE_ENV === 'production'
-				? '/'
-				: 'http://localhost:8000'
-		);
+		const currentSocket = io(process.env.PORT || 'http://localhost:8000/');
 		dispatch(loadSeatsRequest());
-		currentSocket.on('seatsUpdated', (seats) =>
-			dispatch(loadSeatsRequest(seats))
-		);
+		currentSocket.on('seatsUpdated', (seats) => dispatch(loadSeats(seats)));
 		setSocket(currentSocket);
 	}, [dispatch]);
 
