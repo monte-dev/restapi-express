@@ -30,6 +30,10 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
 		);
 	};
 
+	const totalSeats = 50;
+	const freeSeats =
+		totalSeats - seats.filter((seat) => seat.day === chosenDay).length;
+
 	const prepareSeat = (seatId) => {
 		if (seatId === chosenSeat)
 			return (
@@ -74,6 +78,9 @@ const SeatChooser = ({ chosenDay, chosenSeat, updateSeat }) => {
 			{requests['LOAD_SEATS'] && requests['LOAD_SEATS'].success && (
 				<div className="seats">
 					{[...Array(50)].map((x, i) => prepareSeat(i + 1))}
+					<p>
+						Free seats: {freeSeats}/{totalSeats}
+					</p>
 				</div>
 			)}
 			{requests['LOAD_SEATS'] && requests['LOAD_SEATS'].pending && (
