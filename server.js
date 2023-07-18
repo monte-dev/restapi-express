@@ -6,8 +6,8 @@ const socket = require('socket.io');
 const mongoose = require('mongoose');
 
 app.use((req, res, next) => {
-	req.io = io;
-	next();
+  req.io = io;
+  next();
 });
 
 //import routes
@@ -26,34 +26,34 @@ app.use('/api', concertRoutes);
 app.use('/api', seatsRoutes);
 
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
 app.use((req, res) => {
-	res.status(404).json({ message: 'Not found...' });
+  res.status(404).json({ message: 'Not found...' });
 });
 const uri =
-	'mongodb+srv://admin1:tRgAndT1DKIaENzb@cluster0.ruxtn9e.mongodb.net/NewWaveDB';
+  'mongodb+srv://admin:admin@cluster0.ruxtn9e.mongodb.net/NewWaveDB';
 mongoose.connect(uri, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 const db = mongoose.connection;
 
 db.once('open', () => {
-	console.log('Connected to the database');
+  console.log('Connected to the database');
 });
 
 db.on('error', (err) => console.log('Error ' + err));
 
 const server = app.listen(process.env.PORT || 8000, () => {
-	console.log('Server is running on port: 8000');
+  console.log('Server is running on port: 8000');
 });
 
 const io = socket(server);
 
 io.on('connection', (socket) => {
-	console.log('New socket');
+  console.log('New socket');
 });
 
 module.exports = server;
