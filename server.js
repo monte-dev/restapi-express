@@ -32,8 +32,9 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
 	res.status(404).json({ message: 'Not found...' });
 });
-
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
+const uri =
+	'mongodb+srv://admin1:tRgAndT1DKIaENzb@cluster0.ruxtn9e.mongodb.net/NewWaveDB';
+mongoose.connect(uri, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
