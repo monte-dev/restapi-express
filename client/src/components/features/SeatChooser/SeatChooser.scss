@@ -3,6 +3,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
   max-width: 30rem;
+  
+  p {
+    width: 100%;
+  }
 
   &__seat {
     margin: 0.2rem;

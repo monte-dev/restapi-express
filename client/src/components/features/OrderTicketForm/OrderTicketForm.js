@@ -9,7 +9,7 @@ import {
 	Alert,
 	Progress,
 } from 'reactstrap';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -24,7 +24,6 @@ import SeatChooser from './../SeatChooser/SeatChooser';
 const OrderTicketForm = () => {
 	const dispatch = useDispatch();
 	const requests = useSelector(getRequests);
-	console.log(requests);
 
 	const [order, setOrder] = useState({
 		client: '',
@@ -73,15 +72,11 @@ const OrderTicketForm = () => {
 		}
 	};
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			dispatch(loadSeatsRequest());
-		}, 120000);
-
-		return () => {
-			clearInterval(interval);
-		};
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	socket.on('seatsUpdated', (seats) => {
+	// 		dispatch(loadSeats(seats));
+	// 	});
+	// }, [dispatch, socket]);
 
 	return (
 		<Form className="order-ticket-form" onSubmit={submitForm}>
