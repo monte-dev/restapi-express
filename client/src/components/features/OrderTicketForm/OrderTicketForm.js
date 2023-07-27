@@ -72,12 +72,6 @@ const OrderTicketForm = () => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	socket.on('seatsUpdated', (seats) => {
-	// 		dispatch(loadSeats(seats));
-	// 	});
-	// }, [dispatch, socket]);
-
 	return (
 		<Form className="order-ticket-form" onSubmit={submitForm}>
 			<Row>
