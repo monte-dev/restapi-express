@@ -33,12 +33,19 @@ app.use((req, res) => {
 	res.status(404).json({ message: 'Not found...' });
 });
 
-const uri = 'mongodb+srv://admin:admin@cluster0.ruxtn9e.mongodb.net/NewWaveDB';
+const NODE_ENV = process.env.NODE_ENV;
+let dbUri = '';
 
-mongoose.connect(uri, {
+if (NODE_ENV === 'production')
+	dbUri = 'mongodb+srv://admin:admin@cluster0.ruxtn9e.mongodb.net/NewWaveDB';
+else if (NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBTest';
+else dbUri = 'mongodb://localhost:27017/NewWaveDB';
+
+mongoose.connect(dbUri, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+
 const db = mongoose.connection;
 
 db.once('open', () => {
