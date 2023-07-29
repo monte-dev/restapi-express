@@ -4,11 +4,13 @@ const path = require('path');
 const app = express();
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 app.use((req, res, next) => {
 	req.io = io;
 	next();
 });
+app.use(helmet());
 
 //import routes
 const testimonialRoutes = require('./routes/testimonials.routes');
