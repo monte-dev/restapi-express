@@ -9,7 +9,7 @@
 		"helmet": "3.21.1",
 		"mocha": "6.2.1",
 		"mongo-sanitize": "1.0.1",
-		"mongoose": "^7.3.2",
+		"mongoose": "^7.5.0",
 		"nodemon": "^2.0.22",
 		"onchange": "6.1.0",
 		"react": "^18.2.0",
